@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">WA Status Downloader</string>
+    <string name="sharevideoeng">Share video</string>
+    <string name="downloadeng">Download</string>
+    <string name="send_to">Sent to:</string>
+</resources>

@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.gldev.wastatusdownloader.ImageViewerActivity;
+
 import com.gldev.wastatusdownloader.MainActivity;
 import com.gldev.wastatusdownloader.R;
 import com.gldev.wastatusdownloader.adaptors.ImageAdaptor;

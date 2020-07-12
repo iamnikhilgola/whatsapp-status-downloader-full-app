@@ -5,10 +5,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.gldev.wastatusdownloader.adaptors.ImageAdaptor;
 import com.gldev.wastatusdownloader.adaptors.ImageViewerAdaptor;
-import com.gldev.wastatusdownloader.fragments.ImageFragment;
-import com.gldev.wastatusdownloader.models.ImageModel;
 import com.gldev.wastatusdownloader.models.TransferModel;
 import com.gldev.wastatusdownloader.utils.AppConstants;
 
@@ -26,6 +23,7 @@ public class ImageViewerActivity extends AppCompatActivity {
     ImageViewerAdaptor adaptor;
 
     TransferModel model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +70,5 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
 
         return imageModels;
-
     }
 }

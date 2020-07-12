@@ -23,10 +23,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.gldev.wastatusdownloader.ImageViewerActivity;
 import com.gldev.wastatusdownloader.MainActivity;
 import com.gldev.wastatusdownloader.R;
 import com.gldev.wastatusdownloader.adaptors.ImageAdaptor;
 import com.gldev.wastatusdownloader.models.ImageModel;
+import com.gldev.wastatusdownloader.models.TransferModel;
 import com.gldev.wastatusdownloader.utils.AppConstants;
 import com.gldev.wastatusdownloader.utils.FileOperations;
 
@@ -110,6 +112,12 @@ public class ImageFragment extends Fragment {
 
                 }).start();
             }
+    }
+    public void launchImageViewer(ImageModel model){
+        Intent intent = new Intent(getActivity(), ImageViewerActivity.class);
+        TransferModel transferModel = new TransferModel(model.getFile().getName(),model.getPath());
+        intent.putExtra(AppConstants.TRANSFER_KEY_VIEWPAGER,transferModel);
+        startActivity(intent);
     }
     private void broadcastGallery(File file){
         Intent intent =new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);

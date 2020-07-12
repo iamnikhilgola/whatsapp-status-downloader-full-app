@@ -37,7 +37,20 @@ public class ImageViewerActivity extends AppCompatActivity {
     }
     private void initComponents(){
         ButterKnife.bind(this);
-
+        ArrayList<TransferModel> arrayList = getItems();
+        int currentPosition = getItemPosition(arrayList,model);
+        adaptor = new ImageViewerAdaptor(arrayList,this);
+        viewPager.setAdapter(adaptor);
+        viewPager.setCurrentItem(currentPosition);
+        adaptor.notifyDataSetChanged();
+    }
+    private int getItemPosition(ArrayList<TransferModel> arrayList,TransferModel model){
+        int i =0;
+        for(;i<arrayList.size();i++){
+            if(model.getFilename().equals(arrayList.get(i).getFilename()))
+                return i;
+        }
+        return -1;
     }
     private ArrayList<TransferModel> getItems(){
         ArrayList<TransferModel> imageModels = new ArrayList<>();

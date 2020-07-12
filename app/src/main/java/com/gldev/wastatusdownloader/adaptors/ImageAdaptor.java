@@ -66,7 +66,12 @@ public class ImageAdaptor extends RecyclerView.Adapter<ImageAdaptor.ImageViewHol
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
-
+            thumbnailImageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fragment.launchImageViewer(imageModelArrayList.get(getAbsoluteAdapterPosition()));
+                }
+            });
         }
     }
 }

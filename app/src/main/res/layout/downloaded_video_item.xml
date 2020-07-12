@@ -17,11 +17,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/vi_item_RL1">
+            android:id="@+id/downvi_item_RL1">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/vi_thumbnail"
+                android:id="@+id/downvi_thumbnail"
                 android:scaleType="centerCrop">
 
             </ImageView>
@@ -33,18 +33,6 @@
                 android:src="@drawable/ic_baseline_play_circle_outline_24">
 
             </ImageView>
-            <ImageButton
-                android:layout_width="@dimen/_32sdp"
-                android:layout_height="@dimen/_32sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/_4sdp"
-                android:id="@+id/save_video"
-                android:scaleType="center"
-                android:background="@color/alphacolor"
-                android:src="@drawable/ic_baseline_save_alt_24">
-
-            </ImageButton>
 
         </RelativeLayout>
 

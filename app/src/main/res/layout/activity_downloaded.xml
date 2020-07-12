@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".DownloadedActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appbarLayout">
+        android:id="@+id/downloadappbarLayout">
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/yellow_matr"
-            android:id="@+id/ma_toolbar">
+            android:id="@+id/downloadma_toolbar">
         </androidx.appcompat.widget.Toolbar>
         <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabsLayout"
+            android:id="@+id/downloadtabsLayout"
             app:tabIndicatorColor="#fff"
             app:tabIndicatorHeight="2dp"
             app:tabSelectedTextColor="#fff"
@@ -33,8 +33,8 @@
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewPager"
-        android:layout_below="@+id/appbarLayout"
+        android:id="@+id/downloadviewPager"
+        android:layout_below="@+id/downloadappbarLayout"
         android:layout_margin="1dp"
         >
 

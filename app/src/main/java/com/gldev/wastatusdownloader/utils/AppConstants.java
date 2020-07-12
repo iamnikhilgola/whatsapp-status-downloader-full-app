@@ -8,11 +8,7 @@ public class AppConstants {
     public static  final File STATUS_DIRECTORY = new File(Environment.getExternalStorageDirectory()+File.separator+"WhatsApp/media/.Statuses");
     public static  final String MY_DIRECTOY_IMAGE = Environment.getExternalStorageDirectory()+File.separator+"GLWhatsappDownloads"+File.separator+"images";
     public static  final String MY_DIRECTOY_VIDEO = Environment.getExternalStorageDirectory()+File.separator+"GLWhatsappDownloads"+File.separator+"videos";
-<<<<<<< HEAD
     public static  final String TRANSFER_KEY_VIEWPAGER="VIEWPAGERKEY";
-=======
-
->>>>>>> 807972e5b5cf16d3aaabe223ec02d0f04b7ece82
     public static  final int THUMBNAIL_SIZE=360;
     public static boolean checkVideo(File file){
         if(file.getName().endsWith(".MP4")||file.getName().endsWith("mp4"))

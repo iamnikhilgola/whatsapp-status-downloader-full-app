@@ -53,7 +53,7 @@ public class VideoFragment extends Fragment {
         ButterKnife.bind(this,view);
         myVideoData = new ArrayList<>();
         videoRecyclerView.setHasFixedSize(true);
-        videoRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        videoRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));
         handler = new Handler();
         loadData();
     }
@@ -97,6 +97,7 @@ public class VideoFragment extends Fragment {
                                     adaptor = new VideoAdaptor(myVideoData,VideoFragment.this,getContext());
                                     videoRecyclerView.setAdapter(adaptor);
                                     adaptor.notifyDataSetChanged();
+                                    vidProgressBar.setVisibility(View.GONE);
                                 }
                             });
                         }

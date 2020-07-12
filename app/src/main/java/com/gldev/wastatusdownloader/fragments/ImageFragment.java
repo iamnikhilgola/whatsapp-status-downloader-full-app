@@ -96,7 +96,7 @@ public class ImageFragment extends Fragment {
                                     ImageModel imageModel = new ImageModel(f,f.getName(),f.getAbsolutePath());
                                     imageModel.setThumbnail(getThumbnail(imageModel));
                                     imageModels.add(imageModel);
-                                    System.out.println(f.getName());
+                                   // System.out.println(f.getName());
                                 }
                             }
                             handler.post(new Runnable() {
@@ -105,6 +105,7 @@ public class ImageFragment extends Fragment {
                                     adaptor = new ImageAdaptor(imageModels,getContext(),ImageFragment.this);
                                     imageRecyclerView.setAdapter(adaptor);
                                     adaptor.notifyDataSetChanged();
+                                    imageProgressBar.setVisibility(View.GONE);
                                 }
                             });
                         }

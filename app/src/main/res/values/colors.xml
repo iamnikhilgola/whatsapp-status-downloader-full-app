@@ -8,7 +8,9 @@
     <color name="white_pressed">#fafafa</color>
     <color name="half_black">#808080</color>
     <color name="black_semi_transparent">#B2000000</color>
-    <color name="fadewhite_background">#E1F5FE</color>
+    <color name="fadewhite_background">#9C9C9C</color>
 
     <color name="yellow_matr">#fece2f</color>
+    <color name="alphacolor">#00F44336</color>
+
 </resources>

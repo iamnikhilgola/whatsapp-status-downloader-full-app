@@ -9,4 +9,6 @@
     <string name="yes_text">Yes</string>
     <string name="not_text">No</string>
     <string name="downloaded_string">Downloaded</string>
+    <string name="deletefile">Delete Video</string>
+    <string name="videodeleted">Video Deleted Successfully!!</string>
 </resources>

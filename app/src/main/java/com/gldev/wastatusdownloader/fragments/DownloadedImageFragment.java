@@ -98,7 +98,7 @@ public class DownloadedImageFragment extends Fragment {
         transferModel.setDownloadedFile(true);
         intent.putExtra(AppConstants.TRANSFER_KEY_VIEWPAGER,transferModel);
         startActivity(intent);
-        getActivity().finish();
+
     }
 
 

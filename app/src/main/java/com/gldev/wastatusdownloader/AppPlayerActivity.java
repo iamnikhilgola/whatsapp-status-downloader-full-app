@@ -3,6 +3,8 @@ package com.gldev.wastatusdownloader;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,18 +34,29 @@ public class AppPlayerActivity extends AppCompatActivity implements View.OnClick
     private File videoModel;
     private SimpleExoPlayer player;
 
+    private boolean isDownloaded =false;
     @BindView(R.id.videoPlayer)
     PlayerView playerView;
     @BindView(R.id.download_floatbutton)
     FloatingActionButton downloadButton;
     @BindView(R.id.share_floatbutton)
     FloatingActionButton shareButton;
-
+    @BindView(R.id.delete_floatbutton)
+    FloatingActionButton deleteButton;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_player);
-        videoModel = new File(getIntent().getStringExtra("VIDEO"));
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            if(extras.containsKey("VIDEO"))
+                videoModel = new File(getIntent().getStringExtra("VIDEO"));
+            if(extras.containsKey("VIDEOB")){
+                isDownloaded = extras.getBoolean("VIDEOB",false);
+            }
+        }
+
         initComponents();
        // initializePlayer();
     }
@@ -51,6 +64,16 @@ public class AppPlayerActivity extends AppCompatActivity implements View.OnClick
         ButterKnife.bind(this);
         shareButton.setOnClickListener(this);
         downloadButton.setOnClickListener(this);
+        deleteButton.setOnClickListener(this);
+        if(isDownloaded){
+            deleteButton.setVisibility(View.VISIBLE);
+            downloadButton.setVisibility(View.GONE);
+        }
+        else{
+
+            deleteButton.setVisibility(View.GONE);
+            downloadButton.setVisibility(View.VISIBLE);
+        }
     }
     private void initializePlayer(){
         playVideo(Uri.fromFile(videoModel));
@@ -161,5 +184,29 @@ public class AppPlayerActivity extends AppCompatActivity implements View.OnClick
            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.send_to)));
 
        }
+       if(view==deleteButton){
+
+            deleteFile(videoModel);
+       }
+    }
+    private void deleteFile(final File file){
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.deletefile_message) .setTitle(R.string.deletefile_title);
+        builder.setCancelable(false)
+                .setPositiveButton(R.string.yes_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                       file.delete();
+                       Toast.makeText(getApplicationContext(),R.string.videodeleted,Toast.LENGTH_LONG).show();
+                       finish();
+                    }
+                }).setNegativeButton(R.string.not_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

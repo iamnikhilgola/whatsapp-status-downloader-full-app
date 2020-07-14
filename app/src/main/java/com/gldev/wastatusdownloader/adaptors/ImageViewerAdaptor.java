@@ -2,7 +2,9 @@ package com.gldev.wastatusdownloader.adaptors;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,7 +21,9 @@ import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.gldev.wastatusdownloader.ImageViewerActivity;
 import com.gldev.wastatusdownloader.R;
+import com.gldev.wastatusdownloader.fragments.DownloadedImageFragment;
 import com.gldev.wastatusdownloader.models.TransferModel;
 import com.gldev.wastatusdownloader.utils.AppConstants;
 import com.gldev.wastatusdownloader.utils.FileOperations;
@@ -32,9 +36,17 @@ public class ImageViewerAdaptor extends PagerAdapter {
     private ArrayList<TransferModel> imageList;
     private Context context;
     private boolean toggleFlag=false;
+    private  ImageViewerActivity activity;
+
     public ImageViewerAdaptor(ArrayList<TransferModel> imageList, Context context) {
         this.imageList = imageList;
         this.context = context;
+    }
+
+    public ImageViewerAdaptor(ArrayList<TransferModel> imageList, Context context, ImageViewerActivity activity) {
+        this.imageList = imageList;
+        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -49,12 +61,14 @@ public class ImageViewerAdaptor extends PagerAdapter {
         ImageView imageView = view.findViewById(R.id.viewPager_item_image);
         ImageButton shareButton = view.findViewById(R.id.imageViewer_sharebutton);
         ImageButton downloadButton = view.findViewById(R.id.imageviewer_downloadbutton);
+        ImageButton deleteButton=view.findViewById(R.id.imageviewer_deletebutton);
         shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareImage(position);
             }
         });
+
         final RelativeLayout relativeLayout = view.findViewById(R.id.imageViewer_RL);
         relativeLayout.setVisibility(View.GONE);
         downloadButton.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +86,28 @@ public class ImageViewerAdaptor extends PagerAdapter {
                 toggleAnim(relativeLayout);
             }
         });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.deleteImage(position);
+
+            }
+        });
+        if(imageList.get(position).isDownloadedFile()){
+            deleteButton.setVisibility(View.VISIBLE);
+            downloadButton.setVisibility(View.GONE);
+
+        }
+        else{
+            deleteButton.setVisibility(View.GONE);
+            downloadButton.setVisibility(View.VISIBLE);
+        }
         container.addView(view);
 
         return view;
     }
+
+
     private void shareImage(int position){
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);

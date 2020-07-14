@@ -3,6 +3,8 @@ package com.gldev.wastatusdownloader;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.gldev.wastatusdownloader.adaptors.ImageViewerAdaptor;
@@ -24,7 +26,8 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     TransferModel model;
 
-
+    AlertDialog.Builder builder;
+    ArrayList<TransferModel> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +38,13 @@ public class ImageViewerActivity extends AppCompatActivity {
     }
     private void initComponents(){
         ButterKnife.bind(this);
-        ArrayList<TransferModel> arrayList = getItems();
+
+        arrayList = getItems(model.isDownloadedFile());
         int currentPosition = getItemPosition(arrayList,model);
-        adaptor = new ImageViewerAdaptor(arrayList,this);
+        if(!model.isDownloadedFile())
+            adaptor = new ImageViewerAdaptor(arrayList,this);
+        else
+            adaptor = new ImageViewerAdaptor(arrayList,this,this);
         viewPager.setAdapter(adaptor);
         viewPager.setCurrentItem(currentPosition);
         adaptor.notifyDataSetChanged();
@@ -50,9 +57,13 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
         return -1;
     }
-    private ArrayList<TransferModel> getItems(){
+    private ArrayList<TransferModel> getItems(boolean b){
         ArrayList<TransferModel> imageModels = new ArrayList<>();
-        final File fileDir = AppConstants.STATUS_DIRECTORY;
+        File fileDir = AppConstants.STATUS_DIRECTORY;
+
+        if(b){
+            fileDir = new File(AppConstants.MY_DIRECTOY_IMAGE);
+        }
         if(fileDir.exists()){
                     File[] statusFiles = fileDir.listFiles();
 
@@ -62,6 +73,7 @@ public class ImageViewerActivity extends AppCompatActivity {
                         for(File f: statusFiles){
                             if (AppConstants.checkImage(f)) {
                                 TransferModel imageModel = new TransferModel(f.getName(),f.getAbsolutePath());
+                                imageModel.setDownloadedFile(b);
                                 imageModels.add(imageModel);
                             }
                         }
@@ -70,5 +82,32 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
 
         return imageModels;
+    }
+    public void deleteFile(File file,int position){
+        file.delete();
+        arrayList.remove(position);
+
+        adaptor = new ImageViewerAdaptor(arrayList,this,this);
+        viewPager.setAdapter(adaptor);
+        viewPager.setCurrentItem(0);
+        adaptor.notifyDataSetChanged();
+    }
+    public void deleteImage(final int position){
+        builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.deletefile_message) .setTitle(R.string.deletefile_title);
+        builder.setCancelable(false)
+                .setPositiveButton(R.string.yes_text, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        deleteFile(new File(arrayList.get(position).getFilepath()),position);
+                    }
+                }).setNegativeButton(R.string.not_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

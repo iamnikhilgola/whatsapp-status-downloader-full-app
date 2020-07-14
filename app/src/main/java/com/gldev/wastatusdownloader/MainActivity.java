@@ -1,13 +1,17 @@
 package com.gldev.wastatusdownloader;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.gldev.wastatusdownloader.adaptors.TabPagerAdaptor;
 import com.google.android.material.appbar.AppBarLayout;
@@ -44,5 +48,23 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    private void launchDownloadedActivity(){
+        Log.d("MYTAG","LAUNch function");
+            Intent intent = new Intent(this,DownloadedActivity.class);
+            startActivity(intent);
+    }
+    private void launchHelpSystem(){
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_add: launchDownloadedActivity();return true;
+            case R.id.action_help: launchHelpSystem();return true;
+            default: return super.onOptionsItemSelected(item);
+        }
+
     }
 }

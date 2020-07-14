@@ -8,9 +8,9 @@
         android:title="Add">
     </item>
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_help"
         app:showAsAction="never"
-        android:title="Settings">
+        android:title="Help">
     </item>
 
 </menu>

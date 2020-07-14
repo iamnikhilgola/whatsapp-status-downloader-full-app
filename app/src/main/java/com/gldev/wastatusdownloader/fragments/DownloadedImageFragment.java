@@ -1,5 +1,7 @@
 package com.gldev.wastatusdownloader.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +39,8 @@ public class DownloadedImageFragment extends Fragment {
     @BindView(R.id.down_imageProgressBar)
     ProgressBar progressBar;
 
+
+
     ArrayList<ImageModel> imageModels;
     DownloadedImageAdaptor adaptor;
     @Override
@@ -57,7 +61,7 @@ public class DownloadedImageFragment extends Fragment {
 
     private void loadImages() {
         final File fileDir = new File(AppConstants.MY_DIRECTOY_IMAGE);
-        System.out.println(fileDir.getAbsolutePath()+"          ++++++++DEBUGGING");
+        System.out.println(fileDir.getAbsolutePath()+"          ++++++++DEBUGGING------------");
         if(fileDir.exists()){
                     File[] statusFiles = fileDir.listFiles();
                     if(statusFiles!=null && statusFiles.length>0){
@@ -85,12 +89,17 @@ public class DownloadedImageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.downloaded_image_fragment,container,false);
+        return view;
     }
     public void launchImageViewer(ImageModel model){
         Intent intent = new Intent(getActivity(), ImageViewerActivity.class);
         TransferModel transferModel = new TransferModel(model.getFile().getName(),model.getPath());
+        transferModel.setDownloadedFile(true);
         intent.putExtra(AppConstants.TRANSFER_KEY_VIEWPAGER,transferModel);
         startActivity(intent);
+        getActivity().finish();
     }
+
+
 }

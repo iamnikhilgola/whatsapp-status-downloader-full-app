@@ -6,6 +6,15 @@ import java.io.Serializable;
 public class TransferModel implements Serializable {
     private String filename;
     private String filepath;
+    private boolean isDownloadedFile;
+
+    public boolean isDownloadedFile() {
+        return isDownloadedFile;
+    }
+
+    public void setDownloadedFile(boolean downloadedFile) {
+        isDownloadedFile = downloadedFile;
+    }
 
     public TransferModel(String filename, String filepath) {
         this.filename = filename;
@@ -30,4 +39,5 @@ public class TransferModel implements Serializable {
     public File getFile(){
         return new File(filepath);
     }
+
 }

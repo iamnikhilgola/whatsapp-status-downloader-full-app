@@ -27,8 +27,8 @@
             android:layout_height="@dimen/_48sdp"
             android:layout_centerHorizontal="true"
             android:layout_toLeftOf="@+id/templl1"
-            android:background="@color/alphacolor"
-            android:src="@drawable/shareico48"
+            android:background="@drawable/round_green"
+            android:src="@drawable/ic_baseline_share_24"
             android:scaleType="centerCrop"
             android:id="@+id/imageViewer_sharebutton"
             android:layout_marginRight="@dimen/_20sdp">
@@ -49,8 +49,21 @@
             android:id="@+id/imageviewer_downloadbutton"
             android:layout_marginLeft="@dimen/_20sdp"
             android:scaleType="centerCrop"
-            android:background="@color/alphacolor"
-            android:src="@drawable/downloadico48"
+            android:background="@drawable/round_green"
+            android:src="@drawable/ic_baseline_save_alt_24"
+            android:layout_toRightOf="@+id/templl1">
+
+        </ImageButton>
+        <ImageButton
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageviewer_deletebutton"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:background="@drawable/round_green"
+            android:src="@drawable/ic_baseline_delete_24"
             android:layout_toRightOf="@+id/templl1">
 
         </ImageButton>

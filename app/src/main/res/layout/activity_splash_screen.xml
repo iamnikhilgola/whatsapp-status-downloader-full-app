@@ -6,5 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreen"
     android:background="@color/yellow_matr">
+    <ImageView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:src="@drawable/launch"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/pb"
+        android:layout_marginBottom="@dimen/_20sdp"
+        >
 
+    </ImageView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:id="@+id/pb">
+
+    </LinearLayout>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/pb1"
+        android:layout_below="@+id/pb"
+        android:layout_marginTop="@dimen/_40sdp"
+        >
+
+    </ProgressBar>
 </RelativeLayout>

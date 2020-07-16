@@ -10,6 +10,11 @@ import android.os.Bundle;
 import com.gldev.wastatusdownloader.adaptors.ImageViewerAdaptor;
 import com.gldev.wastatusdownloader.models.TransferModel;
 import com.gldev.wastatusdownloader.utils.AppConstants;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +27,11 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     @BindView(R.id.imageViewer_pager)
     ViewPager viewPager;
+    @BindView(R.id.viewimageabovead)
+    AdView aboveAd;
+    @BindView(R.id.viewimagebelowad)
+    AdView belowAd;
+
     ImageViewerAdaptor adaptor;
 
     TransferModel model;
@@ -34,6 +44,18 @@ public class ImageViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_image_viewer);
         model = (TransferModel) getIntent().getSerializableExtra(AppConstants.TRANSFER_KEY_VIEWPAGER);
         initComponents();
+        loadAd(belowAd);
+        loadAd(aboveAd);
+    }
+    private void loadAd(AdView adView){
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
     }
     private void initComponents(){

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WA Status Downloader</string>
+    <string name="app_name">Status Downloader</string>
     <string name="sharevideoeng">Share video</string>
     <string name="downloadeng">Download</string>
     <string name="send_to">Sent to:</string>
@@ -11,4 +11,10 @@
     <string name="downloaded_string">Downloaded</string>
     <string name="deletefile">Delete Video</string>
     <string name="videodeleted">Video Deleted Successfully!!</string>
+    <string name="app_permission_error">App will not work properly if permission is not set.</string>
+    <string name="main_bannerid">ca-app-pub-1554837528700151/6936549725</string>
+    <string name="downloaded_bannerid">ca-app-pub-1554837528700151/4961123070</string>
+    <string name="viewpager_belowbannerid">ca-app-pub-1554837528700151/3990822185</string>
+    <string name="viewpager_abovebannerid">ca-app-pub-1554837528700151/8114077633</string>
+    <string name="banner_test">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

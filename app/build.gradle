@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.gldev.wastatusdownloader"
         minSdkVersion 24
-        targetSdkVersion 30
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.11.7'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.11.7'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'com.google.android.gms:play-services-ads:19.2.0'
 }

@@ -9,6 +9,11 @@ import android.os.Bundle;
 
 import com.gldev.wastatusdownloader.adaptors.DownloadTabPageAdaptor;
 import com.gldev.wastatusdownloader.adaptors.TabPagerAdaptor;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,7 +30,8 @@ public class DownloadedActivity extends AppCompatActivity {
 
     @BindView(R.id.downloadviewPager)
     ViewPager viewPager;
-
+    @BindView(R.id.download_bannerAd)
+    AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +41,17 @@ public class DownloadedActivity extends AppCompatActivity {
         DownloadTabPageAdaptor tabAdaptor = new DownloadTabPageAdaptor(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(tabAdaptor);
         tabLayout.setupWithViewPager(viewPager);
+        loadAd(adView);
+    }
+    private void loadAd(AdView adView){
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
     }
 }

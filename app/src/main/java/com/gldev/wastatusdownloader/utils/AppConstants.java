@@ -22,5 +22,7 @@ public class AppConstants {
         }
         return true;
     }
+
+    private String app_id = "ca-app-pub-1554837528700151~8512806536";
 }
 

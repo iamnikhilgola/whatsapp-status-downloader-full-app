@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
 
-        app:adUnitId="@string/banner_test"
+        app:adUnitId="@string/viewpager_abovebannerid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></com.google.android.gms.ads.AdView>
@@ -35,7 +35,7 @@
         android:layout_centerHorizontal="true"
         app:adSize="BANNER"
 
-        app:adUnitId="@string/banner_test"
+        app:adUnitId="@string/viewpager_belowbannerid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>

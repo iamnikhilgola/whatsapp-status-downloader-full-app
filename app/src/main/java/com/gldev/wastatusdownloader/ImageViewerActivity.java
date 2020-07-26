@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.gldev.wastatusdownloader.adaptors.ImageViewerAdaptor;
 import com.gldev.wastatusdownloader.models.TransferModel;
@@ -38,15 +39,42 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     AlertDialog.Builder builder;
     ArrayList<TransferModel> arrayList;
+    Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_viewer);
         model = (TransferModel) getIntent().getSerializableExtra(AppConstants.TRANSFER_KEY_VIEWPAGER);
         initComponents();
-        loadAd(belowAd);
-        loadAd(aboveAd);
+           }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        endAds();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAds();
+    }
+
+    private void startAds(){
+        adRunnable.run();
+    }
+    private void endAds(){
+        handler.removeCallbacks(adRunnable);
+    }
+    private Runnable adRunnable =  new Runnable() {
+        @Override
+        public void run() {
+            loadAd(belowAd);
+            loadAd(aboveAd);
+
+            handler.postDelayed(this,AppConstants.ADREQUESTTIME);
+        }
+    };
+
     private void loadAd(AdView adView){
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override

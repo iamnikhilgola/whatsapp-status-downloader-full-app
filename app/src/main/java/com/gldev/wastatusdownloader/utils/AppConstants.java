@@ -10,6 +10,8 @@ public class AppConstants {
     public static  final String MY_DIRECTOY_VIDEO = Environment.getExternalStorageDirectory()+File.separator+"GLWhatsappDownloads"+File.separator+"videos";
     public static  final String TRANSFER_KEY_VIEWPAGER="VIEWPAGERKEY";
     public static  final int THUMBNAIL_SIZE=360;
+
+    public static final long ADREQUESTTIME=3000;
     public static boolean checkVideo(File file){
         if(file.getName().endsWith(".MP4")||file.getName().endsWith("mp4"))
             return true;

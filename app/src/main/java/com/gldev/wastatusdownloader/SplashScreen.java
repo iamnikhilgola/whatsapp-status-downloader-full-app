@@ -18,7 +18,8 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P){
             //do something about the Android version being too new
-            exitApp();
+            //exitApp();
+            launchApp();
         }
         else {
             launchApp();

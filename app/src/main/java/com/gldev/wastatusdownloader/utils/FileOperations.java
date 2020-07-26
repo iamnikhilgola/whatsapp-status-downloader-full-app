@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 
 public class FileOperations {
-    public static final String ERROR_MESSAGE="File copying unsuccessful, Try again!!";
+    public static final String ERROR_MESSAGE="File saving unsuccessful, Try again!!";
 
-    public static final String SUCCESS_MESSAGE="File copying successful!!";
+    public static final String SUCCESS_MESSAGE="File saved successful!!";
     public void copyFile(File sourceFile, File destinationFile) throws IOException {
         if(!destinationFile.getParentFile().exists()){
             destinationFile.getParentFile().mkdirs();

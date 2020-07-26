@@ -83,7 +83,7 @@ public class ImageFragment extends Fragment {
     private void loadImages(){
 
          final File fileDir = AppConstants.STATUS_DIRECTORY;
-         System.out.println(fileDir.getAbsolutePath()+"          ++++++++DEBUGGING");
+        // System.out.println(fileDir.getAbsolutePath()+"          ++++++++DEBUGGING");
             if(fileDir.exists()){
                 new Thread(new Runnable() {
                     @Override

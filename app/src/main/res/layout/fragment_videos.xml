@@ -4,13 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fadewhite_background">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/empty_message"
-        android:id="@+id/video_frag_tv">
 
-    </TextView>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

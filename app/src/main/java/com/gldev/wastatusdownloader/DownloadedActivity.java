@@ -6,9 +6,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.gldev.wastatusdownloader.adaptors.DownloadTabPageAdaptor;
 import com.gldev.wastatusdownloader.adaptors.TabPagerAdaptor;
+import com.gldev.wastatusdownloader.utils.AppConstants;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
@@ -32,6 +34,7 @@ public class DownloadedActivity extends AppCompatActivity {
     ViewPager viewPager;
     @BindView(R.id.download_bannerAd)
     AdView adView;
+    Handler handler=new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +44,34 @@ public class DownloadedActivity extends AppCompatActivity {
         DownloadTabPageAdaptor tabAdaptor = new DownloadTabPageAdaptor(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(tabAdaptor);
         tabLayout.setupWithViewPager(viewPager);
-        loadAd(adView);
+        //loadAd(adView);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        endAds();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAds();
+    }
+
+    private void startAds(){
+        adRunnable.run();
+    }
+    private void endAds(){
+        handler.removeCallbacks(adRunnable);
+    }
+    private Runnable adRunnable =  new Runnable() {
+        @Override
+        public void run() {
+            loadAd(adView);
+            handler.postDelayed(this, AppConstants.ADREQUESTTIME);
+        }
+    };
     private void loadAd(AdView adView){
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override

@@ -10,6 +10,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.gldev.wastatusdownloader.adaptors.TabPagerAdaptor;
+import com.gldev.wastatusdownloader.utils.AppConstants;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_bannerAd)
     AdView mainbannerAd;
 
+    Handler handler=new Handler();
     private InterstitialAd mInterstitialAd;
 
     @BindView(R.id.viewPager)
@@ -51,7 +54,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
             load();
-
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
             }
             private void load(){
                 if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)==PackageManager.PERMISSION_GRANTED)
@@ -68,12 +75,26 @@ public class MainActivity extends AppCompatActivity {
             }
     private  void loadInterstetialAd(){
         //Main ad
-        //mInterstitialAd = new InterstitialAd(this);
-        //mInterstitialAd.setAdUnitId("ca-app-pub-1554837528700151/9044015922");
         mInterstitialAd = new InterstitialAd(this);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId("ca-app-pub-1554837528700151/9044015922");
+        //mInterstitialAd = new InterstitialAd(this);
+        //mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+    private void startAds(){
+        adRunnable.run();
+    }
+    private void endAds(){
+        handler.removeCallbacks(adRunnable);
+    }
+    private Runnable adRunnable =  new Runnable() {
+        @Override
+        public void run() {
+            loadAd(mainbannerAd);
+            handler.postDelayed(this, AppConstants.ADREQUESTTIME);
+        }
+    };
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -91,7 +112,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadInterstetialAd();
+        //loadAd(mainbannerAd);
+    }
+    @Override
+    protected void onStop() {
+
+        super.onStop();
+        endAds();
     }
 
     private void init(){
@@ -100,19 +127,15 @@ public class MainActivity extends AppCompatActivity {
         TabPagerAdaptor tabAdaptor = new TabPagerAdaptor(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(tabAdaptor);
         tabLayout.setupWithViewPager(viewPager);
-        loadAd(mainbannerAd);
-
+        //loadAd(mainbannerAd);
+        startAds();
+        loadInterstetialAd();
     }
     private void loadAd(AdView adView){
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-        loadInterstetialAd();
+
 
     }
     @Override
